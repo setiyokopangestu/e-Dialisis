@@ -6,24 +6,94 @@
   <title>Form Input</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Menambahkan gambar latar belakang */
+    body {
+      background-image: url('bggg.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed; 
+      height: 100vh; /* Agar background memenuhi seluruh halaman */
+    }
+
+  </style>
 </head>
 <body>
   <div class="container mt-5">
-    <h1 class="text-center mb-4">Form Input</h1>
+    <h1 class="text-center mb-4">e-Efektifitas Dilisis</h1>
     <form>
-      <div class="mb-3">
-        <label for="inputA" class="form-label">Isian A:</label>
-        <input type="text" class="form-control" id="inputA" name="isian_a" placeholder="Masukkan isian A">
-      </div>
-      <div class="mb-3">
-        <label for="inputB" class="form-label">Isian B:</label>
-        <input type="text" class="form-control" id="inputB" name="isian_b" placeholder="Masukkan isian B">
-      </div>
-      <button type="submit" class="btn btn-primary w-100">Submit</button>
+        <div class="mb-3 mx-4">
+            <label for="inputA" class="form-label">Urea sebelum HD:</label>
+            <div class="input-group">
+                <input type="number" class="form-control" id="inputanA" name="isian_a" placeholder="Masukkan urea sebelum HD" required>
+                <span class="input-group-text">mg/dl</span>
+              </div>
+        </div>
+        <div class="mb-3 mx-4">
+          <label for="inputB" class="form-label">Urea setelah HD:</label>
+          <div class="input-group">
+            <input type="number" class="form-control" id="inputanB" name="isian_b" placeholder="Masukkan urea setelah HD" required>
+            <span class="input-group-text">mg/dl</span>
+          </div>
+        </div>
+        <div class="mb-3 mx-4">
+            <button type="button" class="btn btn-primary w-100" onclick="hitung()">Hitung</button>
+        </div>
     </form>
+    <hr>
+    <div class="mb-3 mx-4" id="optimal" style="display: none;">
+        <h4>Hasil dialisis anda optimal</h4>
+    </div>
+    <div class="mb-3 mx-4" id="tidak_optimal" style="display: none;">
+        <h4>Hasil dialisis anda belum optimal, lakukan hal berikut ini</h4>
+        <ol>
+            <li>Mengendalikan penyakit penyerta / komorbititas, dengan cara berobat dan minum obat secara rutin</li><br>
+            <li>Menjaga pola makan yang seimbang <br> 
+                <b>Batasi Asupan Protein:</b> <br> 
+                Pilih protein berkualitas tinggi (ikan, ayam tanpa kulit, putih telur). Konsumsi sesuai anjuran dokter atau ahli gizi. <br><br>
+                <b>Batasi Asupan Garam (Natrium):</b> <br> 
+                Hindari makanan olahan, seperti keripik, sosis, dan makanan kaleng. Gunakan bumbu alami sebagai pengganti garam. <br><br>
+                <b>Kontrol Asupan Kalium:</b> <br> 
+                Hindari makanan tinggi kalium seperti pisang, alpukat, dan tomat. Pilih buah rendah kalium, seperti apel atau anggur. <br><br>
+                <b>Kontrol Asupan Fosfor:</b> <br> 
+                Batasi susu, keju, kacang-kacangan, dan minuman bersoda.
+            </li><br>
+            <li><b>Membatasi asupan cairan sesuai ajuran dokter</b><br> Sesuaikan jumlah cairan sesuai dengan anjuran dokter, terutama jika sudah mengalami penumpukan cairan/ odem</li><br>
+            <li>Melakukan aktifitas olah raga sesuai kondisi secara teratur selama 20-30 memit setiap hari, seperti jalan kaki, latihan rentang gerak, yoga, untuk meningkatkan sirkulasi darah dan kekuatan otot, dengan persetujuan dokter.</li><br>
+            <li>Melakukan perawatan kateter / vistula AV</li><br>
+            <li>Melakukan dialisis secara teratur sesuai jadwal</li><br>
+            <li>Menjaga kondisi mental dan emosional </li>
+        </ol>
+    </div>
+    <div class="text-center">
+        <br><br>
+        <p>#ayoSehat2025</p>
+        <br>
+    </div>
   </div>
 
   <!-- Bootstrap JS and Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function hitung() {
+      // Mengambil nilai dari inputan
+      var a = parseFloat(document.getElementById('inputanA').value);
+      var b = parseFloat(document.getElementById('inputanB').value);
+
+      // Menghitung hasil rumus
+      var c = a - b;
+      var hasil = c / a * 100;
+
+      document.getElementById('optimal').style.display = 'none';
+      document.getElementById('tidak_optimal').style.display = 'none';
+      // Menampilkan hasil sesuai dengan kondisi
+      if (hasil > 65) {
+        document.getElementById('optimal').style.display = 'block';
+      } else {
+        document.getElementById('tidak_optimal').style.display = 'block';
+      }
+    }
+  </script>
 </body>
 </html>
